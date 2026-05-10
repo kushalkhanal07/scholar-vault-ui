@@ -72,14 +72,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Sanchit — A Vault for Learning" },
+      { name: "description", content: "Smart vault for students to store, organize, search and revise academic materials." },
+      { name: "author", content: "Sanchit" },
+      { property: "og:title", content: "Sanchit — A Vault for Learning" },
+      { property: "og:description", content: "Smart vault for students to store, organize, search and revise academic materials." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -108,12 +107,25 @@ function RootShell({ children }: { children: React.ReactNode }) {
   );
 }
 
+import { AppSidebar } from "@/components/AppSidebar";
+import { TopBar } from "@/components/TopBar";
+import { MobileNav } from "@/components/MobileNav";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <div className="flex min-h-screen w-full">
+        <AppSidebar />
+        <div className="flex-1 flex flex-col min-w-0">
+          <TopBar />
+          <main className="flex-1 px-4 md:px-8 py-6 pb-24 md:pb-10 animate-fade-in">
+            <Outlet />
+          </main>
+        </div>
+        <MobileNav />
+      </div>
     </QueryClientProvider>
   );
 }
