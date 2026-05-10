@@ -108,12 +108,25 @@ function RootShell({ children }: { children: React.ReactNode }) {
   );
 }
 
+import { AppSidebar } from "@/components/AppSidebar";
+import { TopBar } from "@/components/TopBar";
+import { MobileNav } from "@/components/MobileNav";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <div className="flex min-h-screen w-full">
+        <AppSidebar />
+        <div className="flex-1 flex flex-col min-w-0">
+          <TopBar />
+          <main className="flex-1 px-4 md:px-8 py-6 pb-24 md:pb-10 animate-fade-in">
+            <Outlet />
+          </main>
+        </div>
+        <MobileNav />
+      </div>
     </QueryClientProvider>
   );
 }
