@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VaultRouteImport } from './routes/vault'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as RevisionRouteImport } from './routes/revision'
 import { Route as NotesRouteImport } from './routes/notes'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -22,6 +23,11 @@ const VaultRoute = VaultRouteImport.update({
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RevisionRoute = RevisionRouteImport.update({
+  id: '/revision',
+  path: '/revision',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NotesRoute = NotesRouteImport.update({
@@ -38,12 +44,14 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/notes': typeof NotesRoute
+  '/revision': typeof RevisionRoute
   '/search': typeof SearchRoute
   '/vault': typeof VaultRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/notes': typeof NotesRoute
+  '/revision': typeof RevisionRoute
   '/search': typeof SearchRoute
   '/vault': typeof VaultRoute
 }
@@ -51,20 +59,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/notes': typeof NotesRoute
+  '/revision': typeof RevisionRoute
   '/search': typeof SearchRoute
   '/vault': typeof VaultRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/notes' | '/search' | '/vault'
+  fullPaths: '/' | '/notes' | '/revision' | '/search' | '/vault'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/notes' | '/search' | '/vault'
-  id: '__root__' | '/' | '/notes' | '/search' | '/vault'
+  to: '/' | '/notes' | '/revision' | '/search' | '/vault'
+  id: '__root__' | '/' | '/notes' | '/revision' | '/search' | '/vault'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   NotesRoute: typeof NotesRoute
+  RevisionRoute: typeof RevisionRoute
   SearchRoute: typeof SearchRoute
   VaultRoute: typeof VaultRoute
 }
@@ -83,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/search'
       fullPath: '/search'
       preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/revision': {
+      id: '/revision'
+      path: '/revision'
+      fullPath: '/revision'
+      preLoaderRoute: typeof RevisionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/notes': {
@@ -105,6 +122,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   NotesRoute: NotesRoute,
+  RevisionRoute: RevisionRoute,
   SearchRoute: SearchRoute,
   VaultRoute: VaultRoute,
 }
