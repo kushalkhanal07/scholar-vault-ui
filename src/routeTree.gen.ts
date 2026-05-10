@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as VaultRouteImport } from './routes/vault'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as RevisionRouteImport } from './routes/revision'
+import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as NotesRouteImport } from './routes/notes'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -30,6 +31,11 @@ const RevisionRoute = RevisionRouteImport.update({
   path: '/revision',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NotesRoute = NotesRouteImport.update({
   id: '/notes',
   path: '/notes',
@@ -44,6 +50,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/notes': typeof NotesRoute
+  '/notifications': typeof NotificationsRoute
   '/revision': typeof RevisionRoute
   '/search': typeof SearchRoute
   '/vault': typeof VaultRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/notes': typeof NotesRoute
+  '/notifications': typeof NotificationsRoute
   '/revision': typeof RevisionRoute
   '/search': typeof SearchRoute
   '/vault': typeof VaultRoute
@@ -59,21 +67,36 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/notes': typeof NotesRoute
+  '/notifications': typeof NotificationsRoute
   '/revision': typeof RevisionRoute
   '/search': typeof SearchRoute
   '/vault': typeof VaultRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/notes' | '/revision' | '/search' | '/vault'
+  fullPaths:
+    | '/'
+    | '/notes'
+    | '/notifications'
+    | '/revision'
+    | '/search'
+    | '/vault'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/notes' | '/revision' | '/search' | '/vault'
-  id: '__root__' | '/' | '/notes' | '/revision' | '/search' | '/vault'
+  to: '/' | '/notes' | '/notifications' | '/revision' | '/search' | '/vault'
+  id:
+    | '__root__'
+    | '/'
+    | '/notes'
+    | '/notifications'
+    | '/revision'
+    | '/search'
+    | '/vault'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   NotesRoute: typeof NotesRoute
+  NotificationsRoute: typeof NotificationsRoute
   RevisionRoute: typeof RevisionRoute
   SearchRoute: typeof SearchRoute
   VaultRoute: typeof VaultRoute
@@ -102,6 +125,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RevisionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/notes': {
       id: '/notes'
       path: '/notes'
@@ -122,6 +152,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   NotesRoute: NotesRoute,
+  NotificationsRoute: NotificationsRoute,
   RevisionRoute: RevisionRoute,
   SearchRoute: SearchRoute,
   VaultRoute: VaultRoute,
