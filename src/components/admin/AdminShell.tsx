@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { useAdminRole } from "@/lib/admin-role";
 
-const nav = [
+const nav: Array<{ to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean }> = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/admin/users", label: "Users", icon: Users },
   { to: "/admin/learning", label: "Learning Analytics", icon: LineChart },
@@ -30,7 +30,8 @@ const nav = [
   { to: "/admin/feedback", label: "Feedback", icon: MessageSquare },
   { to: "/admin/logs", label: "System Logs", icon: ScrollText },
   { to: "/admin/settings", label: "Settings", icon: Cog },
-] as const;
+];
+
 
 function AdminGate({ onEnter }: { onEnter: () => void }) {
   return (
