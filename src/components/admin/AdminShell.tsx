@@ -84,7 +84,7 @@ export function AdminShell() {
             return (
               <Link
                 key={n.to}
-                to={n.to}
+                to={n.to as any}
                 className={`group flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-[13px] font-medium transition-all ${
                   active
                     ? "bg-sidebar-accent text-sidebar-accent-foreground shadow-soft"
@@ -113,7 +113,7 @@ export function AdminShell() {
               return (
                 <Link
                   key={n.to}
-                  to={n.to}
+                  to={n.to as any}
                   className={`whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-medium border ${
                     active
                       ? "gradient-primary text-primary-foreground border-transparent"
