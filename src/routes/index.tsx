@@ -58,7 +58,7 @@ function Dashboard() {
           <div>
             <p className="text-xs uppercase tracking-widest opacity-80">Sunday, May 10</p>
             <h1 className="text-2xl md:text-3xl font-semibold mt-1 tracking-tight">
-              Good evening, Aarav 🌙 AA
+              Good evening, Aarav 🌙
             </h1>
             <p className="text-sm opacity-90 mt-2 max-w-md">
               You've got <b>4 revisions</b> queued and a <b>27-day streak</b>.
